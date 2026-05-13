@@ -1,26 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { AnimalService } from '../../services/animal-service';
 
 @Component({
   selector: 'app-animal-component',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './animal-component.html',
-  styleUrl: './animal-component.css',
+  styleUrls: ['./animal-component.css']
 })
-export class AnimalComponent {
+export class AnimalComponent implements OnInit {
 
-   animalList:any= [];
+  animalList: any = [];
 
-constructor(private animalService:AnimalService) {}
+  constructor(private animalService: AnimalService) {}
 
-getAllAnimals() {
-this.animalService.getAllAnimalsData().subscribe((data: {}) => {
-this.animalList=data;
-});
+  getAllAnimals() {
+    this.animalService.getAllAnimalsData().subscribe((data: {}) => {
+      this.animalList = data;
+    });
+  }
+
+  ngOnInit(): void {
+    this.getAllAnimals();
+  }
 }
-ngOnInit() {
-this.getAllAnimals();
-}
-}
-
- 
-
